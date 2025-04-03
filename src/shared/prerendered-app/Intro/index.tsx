@@ -429,23 +429,6 @@ export default class Intro extends Component<Props, State> {
                 class={style.footerWave}
               />
             </svg>
-            <div class={style.footerPadding}>
-              <footer class={style.footerItems}>
-                <a
-                  class={style.footerLink}
-                  href="https://github.com/GoogleChromeLabs/squoosh/blob/dev/README.md#privacy"
-                >
-                  {t('intro.footer.privacy')}
-                </a>
-                <a
-                  class={style.footerLinkWithLogo}
-                  href="https://github.com/GoogleChromeLabs/squoosh"
-                >
-                  <img src={githubLogo} alt="" width="10" height="10" />
-                  {t('intro.footer.source')}
-                </a>
-              </footer>
-            </div>
           </div>
         </footer>
         {beforeInstallEvent && (
