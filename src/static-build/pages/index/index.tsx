@@ -27,6 +27,8 @@ interface Props {}
 
 const Index: FunctionalComponent<Props> = () => (
   <html lang={DEFAULT_LANGUAGE}>
+    {' '}
+    {/* Now defaults to Chinese */}
     <head>
       <title>Squoosh</title>
       <meta

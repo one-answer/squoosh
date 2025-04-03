@@ -7,7 +7,7 @@ import { zh } from './zh';
 export type SupportedLanguages = 'en' | 'zh';
 
 // Default language
-export const DEFAULT_LANGUAGE: SupportedLanguages = 'en';
+export const DEFAULT_LANGUAGE: SupportedLanguages = 'zh';
 
 export interface TranslationDictionary {
   [key: string]: string;
