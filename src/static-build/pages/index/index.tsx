@@ -75,6 +75,21 @@ const Index: FunctionalComponent<Props> = () => (
           __html: escapeStyleScriptContent(initialCss),
         }}
       />
+      {/* Google Analytics */}
+      <script
+        async
+        src="https://www.googletagmanager.com/gtag/js?id=G-NNVLKJ9W2C"
+      ></script>
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-NNVLKJ9W2C');
+          `,
+        }}
+      />
     </head>
     <body>
       <div id="app">

@@ -2,6 +2,7 @@ import { h, Component } from 'preact';
 
 import * as style from './style.css';
 import { useTranslation } from 'shared/i18n';
+import { sendEvent } from 'shared/analytics';
 import 'add-css:./style.css';
 import {
   blobToImg,
@@ -177,6 +178,8 @@ async function compressImage(
   assertSignal(signal);
 
   const encoder = encoderMap[encodeData.type];
+  const startTime = performance.now();
+
   const compressedData = await encoder.encode(
     signal,
     workerBridge,
@@ -184,6 +187,24 @@ async function compressImage(
     // The type of encodeData.options is enforced via the previous line
     encodeData.options as any,
   );
+
+  const endTime = performance.now();
+  const compressionTime = endTime - startTime;
+
+  // 跟踪压缩事件
+  const originalSize = image.width * image.height * 4; // RGBA
+  const compressedSize =
+    compressedData instanceof Blob
+      ? compressedData.size
+      : compressedData.byteLength;
+
+  sendEvent('image_compressed', {
+    encoder_type: encodeData.type,
+    compression_time_ms: Math.round(compressionTime),
+    original_size: originalSize,
+    compressed_size: compressedSize,
+    compression_ratio: originalSize / compressedSize,
+  });
 
   // This type ensures the image mimetype is consistent with our mimetype sniffer
   const type: ImageMimeTypes = encoder.meta.mimeType;

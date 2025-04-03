@@ -6,6 +6,7 @@ import { h, Component } from 'preact';
 
 import { linkRef } from 'shared/prerendered-app/util';
 import { useTranslation } from 'shared/i18n';
+import { sendPageView, sendEvent } from 'shared/analytics';
 import * as style from './style.css';
 import 'add-css:./style.css';
 import 'file-drop-element';
@@ -46,6 +47,14 @@ export default class App extends Component<Props, State> {
   constructor() {
     super();
 
+    // 发送初始页面浏览事件
+    sendPageView(window.location.pathname, document.title);
+
+    // 监听路由变化
+    window.addEventListener('popstate', () => {
+      sendPageView(window.location.pathname, document.title);
+    });
+
     compressPromise
       .then((module) => {
         this.setState({ Compress: module.default });
@@ -79,11 +88,26 @@ export default class App extends Component<Props, State> {
   private onFileDrop = ({ files }: FileDropEvent) => {
     if (!files || files.length === 0) return;
     const file = files[0];
+
+    // 跟踪文件上传事件
+    sendEvent('file_upload', {
+      method: 'drop',
+      file_type: file.type,
+      file_size: file.size,
+    });
+
     this.openEditor();
     this.setState({ file });
   };
 
   private onIntroPickFile = (file: File) => {
+    // 跟踪文件选择事件
+    sendEvent('file_upload', {
+      method: 'pick',
+      file_type: file.type,
+      file_size: file.size,
+    });
+
     this.openEditor();
     this.setState({ file });
   };
@@ -106,6 +130,10 @@ export default class App extends Component<Props, State> {
     const editorURL = new URL(location.href);
     editorURL.pathname = ROUTE_EDITOR;
     history.pushState(null, '', editorURL.href);
+
+    // 跟踪编辑器页面浏览
+    sendPageView(ROUTE_EDITOR, '小图精灵 - 编辑器');
+
     this.setState({ isEditorOpen: true });
   };
 
