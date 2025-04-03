@@ -3,20 +3,33 @@
   height: 100%;
   contain: strict;
   display: grid;
-  grid-template-rows: max-content 1fr;
+  grid-template-rows: max-content max-content 1fr;
   grid-template-areas:
     'header'
+    'ad'
     'opts';
 
   --options-radius: 7px;
 
   @media (min-width: 600px) {
-    grid-template-rows: max-content 1fr;
+    grid-template-rows: max-content max-content 1fr;
     grid-template-columns: max-content 1fr max-content;
     grid-template-areas:
       'header header header'
+      'ad ad ad'
       'optsLeft viewportOpts optsRight';
   }
+}
+
+.ad-container {
+  grid-area: ad;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
 }
 
 .options {

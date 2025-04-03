@@ -19,6 +19,12 @@
   display: none;
 }
 
+.ad-container {
+  margin: 30px auto;
+  max-width: 728px;
+  width: 100%;
+}
+
 .main {
   min-height: 541px;
   display: grid;

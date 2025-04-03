@@ -3,6 +3,7 @@ import { h, Component } from 'preact';
 import { linkRef } from 'shared/prerendered-app/util';
 import { useTranslation } from 'shared/i18n';
 import LanguageSelector from 'shared/custom-els/language-selector';
+import AdUnit from 'shared/custom-els/ad-unit';
 import '../../custom-els/loading-spinner';
 import logo from 'url:./imgs/new-logo.svg';
 import githubLogo from 'url:./imgs/github-logo.svg';
@@ -343,6 +344,11 @@ export default class Intro extends Component<Props, State> {
                 </li>
               ))}
             </ul>
+
+            {/* 广告位 */}
+            <div class={style.adContainer}>
+              <AdUnit slot="5678901234" format="auto" responsive={true} />
+            </div>
           </div>
         </div>
 

@@ -3,6 +3,7 @@ import { h, Component } from 'preact';
 import * as style from './style.css';
 import { useTranslation } from 'shared/i18n';
 import { sendEvent } from 'shared/analytics';
+import AdUnit from 'shared/custom-els/ad-unit';
 import 'add-css:./style.css';
 import {
   blobToImg,
@@ -1018,6 +1019,11 @@ export default class Compress extends Component<Props, State> {
             />
           </svg>
         </button>
+        {/* 广告位 */}
+        <div class={style.adContainer}>
+          <AdUnit slot="9012345678" format="auto" responsive={true} />
+        </div>
+
         {mobileView ? (
           <div class={style.options}>
             <multi-panel class={style.multiPanel} open-one-only>
