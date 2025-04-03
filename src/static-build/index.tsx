@@ -16,6 +16,8 @@ import { renderPage, writeFiles } from './utils';
 import IndexPage from './pages/index';
 import * as iconLargeMaskable from 'img-url:static-build/assets/icon-large-maskable.png';
 import * as iconLarge from 'img-url:static-build/assets/icon-large.png';
+import * as faviconPng from 'img-url:static-build/assets/favicon.png';
+import * as favicon192 from 'img-url:static-build/assets/favicon-192.png';
 import * as screenshot1 from 'img-url:static-build/assets/screenshot1.png';
 import * as screenshot2 from 'img-url:static-build/assets/screenshot2.jpg';
 import * as screenshot3 from 'img-url:static-build/assets/screenshot3.jpg';
@@ -55,8 +57,8 @@ interface Output {
 const toOutput: Output = {
   'index.html': renderPage(<IndexPage />),
   'manifest.json': JSON.stringify({
-    name: 'Squoosh',
-    short_name: 'Squoosh',
+    name: '小图精灵',
+    short_name: '小图精灵',
     start_url: '/?utm_medium=PWA&utm_source=launcher',
     display: 'standalone',
     orientation: 'any',
@@ -64,20 +66,21 @@ const toOutput: Output = {
     theme_color: '#ff3385',
     icons: [
       {
-        src: iconLarge.default,
-        type: lookupMime(iconLarge.default),
-        sizes: manifestSize(iconLarge),
+        src: faviconPng.default,
+        type: 'image/png',
+        sizes: '32x32',
+        purpose: 'any',
       },
       {
-        src: iconLargeMaskable.default,
-        type: lookupMime(iconLargeMaskable.default),
-        sizes: manifestSize(iconLargeMaskable),
-        purpose: 'maskable',
+        src: favicon192.default,
+        type: 'image/png',
+        sizes: '192x192',
+        purpose: 'any maskable',
       },
     ],
     description:
       'Compress and compare images with different codecs, right in your browser.',
-    lang: 'en',
+    lang: 'zh',
     categories: ['photo', 'productivity', 'utilities'],
     screenshots,
     share_target: {

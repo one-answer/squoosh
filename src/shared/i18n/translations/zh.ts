@@ -3,7 +3,7 @@
  */
 export const zh = {
   // General
-  'app.title': 'Squoosh',
+  'app.title': '小图精灵',
   'app.description': '在浏览器中压缩和比较使用不同编解码器的图像。',
 
   // Intro page

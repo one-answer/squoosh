@@ -3,7 +3,7 @@
  */
 export const en = {
   // General
-  'app.title': 'Squoosh',
+  'app.title': 'XiaoTu Sprite',
   'app.description':
     'Compress and compare images with different codecs, right in your browser.',
 

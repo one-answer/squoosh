@@ -14,6 +14,8 @@ import { h, FunctionalComponent } from 'preact';
 import { DEFAULT_LANGUAGE } from 'shared/i18n';
 
 import baseCss from 'css:./base.css';
+import * as faviconPng from 'img-url:../../assets/favicon.png';
+import * as favicon192 from 'img-url:../../assets/favicon-192.png';
 import initialCss from 'initial-css:';
 import { allSrc } from 'client-bundle:client/initial-app';
 import favicon from 'url:static-build/assets/favicon.ico';
@@ -30,14 +32,14 @@ const Index: FunctionalComponent<Props> = () => (
     {' '}
     {/* Now defaults to Chinese */}
     <head>
-      <title>Squoosh</title>
+      <title>小图精灵</title>
       <meta
         name="description"
         content="Squoosh is the ultimate image optimizer that allows you to compress and compare images with different codecs in your browser."
       />
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:site" content="@SquooshApp" />
-      <meta property="og:title" content="Squoosh" />
+      <meta property="og:title" content="小图精灵" />
       <meta property="og:type" content="website" />
       <meta property="og:image" content={`${siteOrigin}${ogImage}`} />
       <meta
@@ -61,8 +63,9 @@ const Index: FunctionalComponent<Props> = () => (
       />
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
-      <link rel="shortcut icon" href={favicon} />
-      <link rel="apple-touch-icon" href={ogImage} />
+      <link rel="shortcut icon" href={faviconPng.default} />
+      <link rel="icon" href={faviconPng.default} />
+      <link rel="apple-touch-icon" href={favicon192.default} />
       <meta name="theme-color" content="#ff3385" />
       <link rel="manifest" href="/manifest.json" />
       <link rel="canonical" href={siteOrigin} />
