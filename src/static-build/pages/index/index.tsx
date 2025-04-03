@@ -14,11 +14,10 @@ import { h, FunctionalComponent } from 'preact';
 import { DEFAULT_LANGUAGE } from 'shared/i18n';
 
 import baseCss from 'css:./base.css';
-import * as faviconPng from 'img-url:../../assets/favicon.png';
 import * as favicon192 from 'img-url:../../assets/favicon-192.png';
 import initialCss from 'initial-css:';
 import { allSrc } from 'client-bundle:client/initial-app';
-import favicon from 'url:static-build/assets/favicon.ico';
+import logo from 'url:../../../shared/prerendered-app/Intro/imgs/new-logo.svg';
 import ogImage from 'url:static-build/assets/icon-large-maskable.png';
 import { escapeStyleScriptContent, siteOrigin } from 'static-build/utils';
 import Intro from 'shared/prerendered-app/Intro';
@@ -63,8 +62,7 @@ const Index: FunctionalComponent<Props> = () => (
       />
       <meta name="mobile-web-app-capable" content="yes" />
       <meta name="apple-mobile-web-app-capable" content="yes" />
-      <link rel="shortcut icon" href={faviconPng.default} />
-      <link rel="icon" href={faviconPng.default} />
+      <link rel="icon" type="image/svg+xml" href={logo} />
       <link rel="apple-touch-icon" href={favicon192.default} />
       <meta name="theme-color" content="#ff3385" />
       <link rel="manifest" href="/manifest.json" />
