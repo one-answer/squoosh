@@ -12,12 +12,18 @@
  */
 import { h, render } from 'preact';
 import App from './App';
+import { LanguageProvider } from 'shared/i18n';
 
 const root = document.getElementById('app') as HTMLElement;
 
 async function main() {
   if (!__PRODUCTION__) await import('preact/debug');
-  render(<App />, root);
+  render(
+    <LanguageProvider>
+      <App />
+    </LanguageProvider>,
+    root,
+  );
 }
 
 main();

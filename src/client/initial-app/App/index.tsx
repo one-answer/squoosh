@@ -5,6 +5,7 @@ import type { SnackOptions } from 'shared/custom-els/snack-bar';
 import { h, Component } from 'preact';
 
 import { linkRef } from 'shared/prerendered-app/util';
+import { useTranslation } from 'shared/i18n';
 import * as style from './style.css';
 import 'add-css:./style.css';
 import 'file-drop-element';
@@ -50,7 +51,8 @@ export default class App extends Component<Props, State> {
         this.setState({ Compress: module.default });
       })
       .catch(() => {
-        this.showSnack('Failed to load app');
+        const { t } = useTranslation();
+        this.showSnack(t('error.load_failed'));
       });
 
     swBridgePromise.then(async ({ offliner, getSharedImage }) => {

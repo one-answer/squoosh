@@ -1,6 +1,8 @@
 import { h, Component } from 'preact';
 
 import { linkRef } from 'shared/prerendered-app/util';
+import { useTranslation } from 'shared/i18n';
+import LanguageSelector from 'shared/custom-els/language-selector';
 import '../../custom-els/loading-spinner';
 import logo from 'url:./imgs/logo.svg';
 import githubLogo from 'url:./imgs/github-logo.svg';
@@ -23,28 +25,28 @@ import SlideOnScroll from './SlideOnScroll';
 
 const demos = [
   {
-    description: 'Large photo',
+    descriptionKey: 'intro.demo.large_photo',
     size: '2.8MB',
     filename: 'photo.jpg',
     url: largePhoto,
     iconUrl: largePhotoIcon,
   },
   {
-    description: 'Artwork',
+    descriptionKey: 'intro.demo.artwork',
     size: '2.9MB',
     filename: 'art.jpg',
     url: artwork,
     iconUrl: artworkIcon,
   },
   {
-    description: 'Device screen',
+    descriptionKey: 'intro.demo.device_screen',
     size: '1.6MB',
     filename: 'pixel3.png',
     url: deviceScreen,
     iconUrl: deviceScreenIcon,
   },
   {
-    description: 'SVG icon',
+    descriptionKey: 'intro.demo.svg_icon',
     size: '13KB',
     filename: 'squoosh.svg',
     url: logo,
@@ -225,6 +227,7 @@ export default class Intro extends Component<Props, State> {
     {}: Props,
     { fetchingDemoIndex, beforeInstallEvent, showBlobSVG }: State,
   ) {
+    const { t } = useTranslation();
     return (
       <div class={style.intro}>
         <input
@@ -285,15 +288,17 @@ export default class Intro extends Component<Props, State> {
                 </svg>
               </button>
               <div>
-                <span class={style.dropText}>Drop </span>OR{' '}
+                <span class={style.dropText}>{t('intro.drop')} </span>
+                {t('intro.or')}{' '}
                 {supportsClipboardAPI ? (
                   <button class={style.pasteBtn} onClick={this.onPasteClick}>
-                    Paste
+                    {t('intro.paste')}
                   </button>
                 ) : (
-                  'Paste'
+                  t('intro.paste')
                 )}
               </div>
+              <LanguageSelector />
             </div>
           </div>
         </div>
@@ -310,7 +315,7 @@ export default class Intro extends Component<Props, State> {
           </svg>
           <div class={style.contentPadding}>
             <p class={style.demoTitle}>
-              Or <strong>try one</strong> of these:
+              <span dangerouslySetInnerHTML={{ __html: t('intro.try_one') }} />
             </p>
             <ul class={style.demos}>
               {demos.map((demo, i) => (
@@ -324,7 +329,7 @@ export default class Intro extends Component<Props, State> {
                         <img
                           class={style.demoIcon}
                           src={demo.iconUrl}
-                          alt={demo.description}
+                          alt={t(demo.descriptionKey)}
                         />
                         {fetchingDemoIndex === i && (
                           <div class={style.demoLoader}>
@@ -355,11 +360,8 @@ export default class Intro extends Component<Props, State> {
             <SlideOnScroll>
               <div class={style.infoContent}>
                 <div class={style.infoTextWrapper}>
-                  <h2 class={style.infoTitle}>Small</h2>
-                  <p class={style.infoCaption}>
-                    Smaller images mean faster load times. Squoosh can reduce
-                    file size and maintain high quality.
-                  </p>
+                  <h2 class={style.infoTitle}>{t('intro.small.title')}</h2>
+                  <p class={style.infoCaption}>{t('intro.small.caption')}</p>
                 </div>
                 <div class={style.infoImgWrapper}>
                   <img
@@ -380,12 +382,8 @@ export default class Intro extends Component<Props, State> {
             <SlideOnScroll>
               <div class={style.infoContent}>
                 <div class={style.infoTextWrapper}>
-                  <h2 class={style.infoTitle}>Simple</h2>
-                  <p class={style.infoCaption}>
-                    Open your image, inspect the differences, then save
-                    instantly. Feeling adventurous? Adjust the settings for even
-                    smaller files.
-                  </p>
+                  <h2 class={style.infoTitle}>{t('intro.simple.title')}</h2>
+                  <p class={style.infoCaption}>{t('intro.simple.caption')}</p>
                 </div>
                 <div class={style.infoImgWrapper}>
                   <img
@@ -406,11 +404,8 @@ export default class Intro extends Component<Props, State> {
             <SlideOnScroll>
               <div class={style.infoContent}>
                 <div class={style.infoTextWrapper}>
-                  <h2 class={style.infoTitle}>Secure</h2>
-                  <p class={style.infoCaption}>
-                    Worried about privacy? Images never leave your device since
-                    Squoosh does all the work locally.
-                  </p>
+                  <h2 class={style.infoTitle}>{t('intro.secure.title')}</h2>
+                  <p class={style.infoCaption}>{t('intro.secure.caption')}</p>
                 </div>
                 <div class={style.infoImgWrapper}>
                   <img
@@ -440,14 +435,14 @@ export default class Intro extends Component<Props, State> {
                   class={style.footerLink}
                   href="https://github.com/GoogleChromeLabs/squoosh/blob/dev/README.md#privacy"
                 >
-                  Privacy
+                  {t('intro.footer.privacy')}
                 </a>
                 <a
                   class={style.footerLinkWithLogo}
                   href="https://github.com/GoogleChromeLabs/squoosh"
                 >
                   <img src={githubLogo} alt="" width="10" height="10" />
-                  Source on Github
+                  {t('intro.footer.source')}
                 </a>
               </footer>
             </div>
@@ -455,7 +450,7 @@ export default class Intro extends Component<Props, State> {
         </footer>
         {beforeInstallEvent && (
           <button class={style.installBtn} onClick={this.onInstallClick}>
-            Install
+            {t('intro.install')}
           </button>
         )}
       </div>

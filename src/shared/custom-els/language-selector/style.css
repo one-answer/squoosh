@@ -1,0 +1,23 @@
+.language-selector {
+  display: flex;
+  align-items: center;
+  margin: 0.5rem 0;
+}
+
+.label {
+  margin-right: 0.5rem;
+  color: #fff;
+  font-size: 0.9rem;
+}
+
+.select {
+  background: var(--dark-gray);
+  border-radius: 4px;
+  font: inherit;
+  padding: 0.3rem 0.5rem;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  border: none;
+  color: #fff;
+  font-size: 0.9rem;
+}

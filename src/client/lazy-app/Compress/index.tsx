@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 
 import * as style from './style.css';
+import { useTranslation } from 'shared/i18n';
 import 'add-css:./style.css';
 import {
   blobToImg,
@@ -417,6 +418,7 @@ export default class Compress extends Component<Props, State> {
   }
 
   private onCopyToOtherClick = async (index: 0 | 1) => {
+    const { t } = useTranslation();
     const otherIndex = index ? 0 : 1;
     const oldSettings = this.state.sides[otherIndex];
     const newSettings = { ...this.state.sides[index] };
@@ -431,9 +433,9 @@ export default class Compress extends Component<Props, State> {
       sides: cleanSet(this.state.sides, otherIndex, newSettings),
     });
 
-    const result = await this.props.showSnack('Settings copied across', {
+    const result = await this.props.showSnack(t('compress.settings_copied'), {
       timeout: 5000,
-      actions: ['undo', 'dismiss'],
+      actions: [t('compress.undo'), t('compress.dismiss')],
     });
 
     if (result !== 'undo') return;
@@ -457,9 +459,10 @@ export default class Compress extends Component<Props, State> {
       localStorage.setItem('leftSideSettings', leftSideSettings);
       // Firing an event when we save side settings in localstorage
       window.dispatchEvent(new CustomEvent('leftSideSettings'));
-      await this.props.showSnack('Left side settings saved', {
+      const { t } = useTranslation();
+      await this.props.showSnack(t('compress.settings_saved'), {
         timeout: 1500,
-        actions: ['dismiss'],
+        actions: [t('compress.dismiss')],
       });
       return;
     }

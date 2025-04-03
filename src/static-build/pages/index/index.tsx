@@ -11,6 +11,7 @@
  * limitations under the License.
  */
 import { h, FunctionalComponent } from 'preact';
+import { DEFAULT_LANGUAGE } from 'shared/i18n';
 
 import baseCss from 'css:./base.css';
 import initialCss from 'initial-css:';
@@ -25,7 +26,7 @@ import * as snackbarStyle from '../../../shared/custom-els/snack-bar/styles.css'
 interface Props {}
 
 const Index: FunctionalComponent<Props> = () => (
-  <html lang="en">
+  <html lang={DEFAULT_LANGUAGE}>
     <head>
       <title>Squoosh</title>
       <meta
@@ -95,6 +96,7 @@ const Index: FunctionalComponent<Props> = () => (
               <a class={snackbarStyle.button} href="/">
                 reload
               </a>
+              {/* Note: This text will be replaced by the translated version when JS loads */}
             </div>
           </snack-bar>
         </noscript>

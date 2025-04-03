@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 
 import * as style from './style.css';
+import { useTranslation } from 'shared/i18n';
 import 'add-css:./style.css';
 import { cleanSet, cleanMerge } from '../../util/clean-modify';
 
@@ -151,6 +152,7 @@ export default class Options extends Component<Props, State> {
     { source, encoderState, processorState }: Props,
     { supportedEncoderMap }: State,
   ) {
+    const { t } = useTranslation();
     const encoder = encoderState && encoderMap[encoderState.type];
     const EncoderOptionComponent =
       encoder && 'Options' in encoder ? encoder.Options : undefined;
@@ -168,17 +170,17 @@ export default class Options extends Component<Props, State> {
             <div>
               <h3 class={style.optionsTitle}>
                 <div class={style.titleAndButtons}>
-                  Edit
+                  {t('compress.edit')}
                   <button
                     class={style.copyOverButton}
-                    title="Copy settings to other side"
+                    title={t('compress.copy_settings')}
                     onClick={this.onCopyToOtherSideClick}
                   >
                     <SwapIcon />
                   </button>
                   <button
                     class={style.saveButton}
-                    title="Save side settings"
+                    title={t('compress.save_settings')}
                     onClick={this.onSaveSideSettingClick}
                   >
                     <SaveIcon />
@@ -195,7 +197,7 @@ export default class Options extends Component<Props, State> {
                         ? style.buttonOpacity
                         : '')
                     }
-                    title="Import saved side settings"
+                    title={t('compress.import_settings')}
                     onClick={this.onImportSideSettingsClick}
                     disabled={
                       // Disabled if this side's settings haven't been saved
@@ -248,7 +250,7 @@ export default class Options extends Component<Props, State> {
           )}
         </Expander>
 
-        <h3 class={style.optionsTitle}>Compress</h3>
+        <h3 class={style.optionsTitle}>{t('compress.compress')}</h3>
 
         <section class={`${style.optionOneCell} ${style.optionsSection}`}>
           {supportedEncoderMap ? (
@@ -257,7 +259,7 @@ export default class Options extends Component<Props, State> {
               onChange={this.onEncoderTypeChange}
               large
             >
-              <option value="identity">{`Original Image ${
+              <option value="identity">{`${t('compress.original_image')} ${
                 this.props.source ? `(${this.props.source.file.name})` : ''
               }`}</option>
               {Object.entries(supportedEncoderMap).map(([type, encoder]) => (
@@ -266,7 +268,7 @@ export default class Options extends Component<Props, State> {
             </Select>
           ) : (
             <Select large>
-              <option>Loading…</option>
+              <option>{t('compress.loading')}</option>
             </Select>
           )}
         </section>

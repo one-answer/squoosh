@@ -1,5 +1,6 @@
 import * as style from './styles.css';
 import 'add-css:./styles.css';
+import { translations, DEFAULT_LANGUAGE } from 'shared/i18n/translations';
 
 // So it doesn't cause an error when running in node
 const HTMLEl = (__PRERENDER__
@@ -15,7 +16,20 @@ function createSnack(
   message: string,
   options: SnackOptions,
 ): [Element, Promise<string>] {
-  const { timeout = 0, actions = ['dismiss'] } = options;
+  // Get current language from localStorage or use default
+  const currentLang =
+    typeof localStorage !== 'undefined'
+      ? localStorage.getItem('language') || DEFAULT_LANGUAGE
+      : DEFAULT_LANGUAGE;
+
+  // Get translations for the current language
+  const currentTranslations =
+    translations[currentLang] || translations[DEFAULT_LANGUAGE];
+
+  // Use translated 'dismiss' or fallback to English
+  const dismissText = currentTranslations['compress.dismiss'] || 'dismiss';
+
+  const { timeout = 0, actions = [dismissText] } = options;
 
   const el = document.createElement('div');
   el.className = style.snackbar;
